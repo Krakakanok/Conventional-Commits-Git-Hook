@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+import re, sys
+
+message_file = open(sys.argv[1], "r")
+message = message_file.readline()
+
+regex = r"^(fix|feat|BREAKING CHANGE|chore|docs|style|refactor|perf|test|improvement)(\(\w+\))?: \w+.*$"
+
+matches = re.search(regex, message)
+
+if not matches:
+    print ("Commit message not follow Conventional Commits")
+    exit(1)
